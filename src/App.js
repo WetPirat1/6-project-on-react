@@ -8,7 +8,7 @@ function App() {
   const [fromPrice, setFromPrice] = React.useState(0);
   const [toPrice, setToPrice] = React.useState(0);
 
-  const [rates, useRates] = React.useState({});
+  const [rates, setRates] = React.useState({});
 
   React.useEffect(() => {
     fetch('https://cdn.cur.su/api/latest.json')
@@ -34,6 +34,7 @@ function App() {
   const onChangeToPrice = (value) => {
     const result = (rates[fromCurrency] / rates[toCurrency]) * value;
     setFromPrice(result)
+    setToPrice(value);
   }
 
   
@@ -42,7 +43,7 @@ function App() {
 
   React.useEffect(() => {
     onChangeFromPrice(fromPrice);
-  }, [fromCurrencym, fromPrice])
+  }, [fromCurrency, fromPrice])
 
   React.useEffect(() => {
     onChangeToPrice(toPrice);
